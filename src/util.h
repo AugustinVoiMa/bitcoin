@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Pizcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,11 +7,11 @@
  * Server/client environment: argument handling, config file parsing,
  * thread wrappers, startup time
  */
-#ifndef BITCOIN_UTIL_H
-#define BITCOIN_UTIL_H
+#ifndef PIZCOIN_UTIL_H
+#define PIZCOIN_UTIL_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/pizcoin-config.h>
 #endif
 
 #include <compat.h>
@@ -47,8 +47,8 @@ public:
 
 extern CTranslationInterface translationInterface;
 
-extern const char * const BITCOIN_CONF_FILENAME;
-extern const char * const BITCOIN_PID_FILENAME;
+extern const char * const PIZCOIN_CONF_FILENAME;
+extern const char * const PIZCOIN_PID_FILENAME;
 
 /**
  * Translation function: Call Translate signal on UI interface, which returns a boost::optional result.
@@ -316,7 +316,7 @@ void RenameThread(const char* name);
  */
 template <typename Callable> void TraceThread(const char* name,  Callable func)
 {
-    std::string s = strprintf("bitcoin-%s", name);
+    std::string s = strprintf("pizcoin-%s", name);
     RenameThread(s.c_str());
     try
     {
@@ -357,4 +357,4 @@ std::unique_ptr<T> MakeUnique(Args&&... args)
  */
 int ScheduleBatchPriority(void);
 
-#endif // BITCOIN_UTIL_H
+#endif // PIZCOIN_UTIL_H

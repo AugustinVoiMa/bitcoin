@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2017 The Pizcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_MACNOTIFICATIONHANDLER_H
-#define BITCOIN_QT_MACNOTIFICATIONHANDLER_H
+#ifndef PIZCOIN_QT_MACNOTIFICATIONHANDLER_H
+#define PIZCOIN_QT_MACNOTIFICATIONHANDLER_H
 
 #include <QObject>
 
@@ -24,4 +24,4 @@ public:
 };
 
 
-#endif // BITCOIN_QT_MACNOTIFICATIONHANDLER_H
+#endif // PIZCOIN_QT_MACNOTIFICATIONHANDLER_H

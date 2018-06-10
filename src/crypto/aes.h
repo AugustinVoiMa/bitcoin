@@ -1,11 +1,11 @@
-// Copyright (c) 2015-2017 The Bitcoin Core developers
+// Copyright (c) 2015-2017 The Pizcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 //
 // C++ wrapper around ctaes, a constant-time AES implementation
 
-#ifndef BITCOIN_CRYPTO_AES_H
-#define BITCOIN_CRYPTO_AES_H
+#ifndef PIZCOIN_CRYPTO_AES_H
+#define PIZCOIN_CRYPTO_AES_H
 
 extern "C" {
 #include <crypto/ctaes/ctaes.h>
@@ -115,4 +115,4 @@ private:
     unsigned char iv[AES_BLOCKSIZE];
 };
 
-#endif // BITCOIN_CRYPTO_AES_H
+#endif // PIZCOIN_CRYPTO_AES_H

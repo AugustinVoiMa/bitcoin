@@ -1,33 +1,33 @@
-# /etc/conf.d/bitcoind: config file for /etc/init.d/bitcoind
+# /etc/conf.d/pizcoind: config file for /etc/init.d/pizcoind
 
 # Config file location
-#BITCOIND_CONFIGFILE="/etc/bitcoin/bitcoin.conf"
+#PIZCOIND_CONFIGFILE="/etc/pizcoin/pizcoin.conf"
 
-# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
-#BITCOIND_PIDDIR="/var/run/bitcoind"
+# What directory to write pidfile to?  (created and owned by $PIZCOIND_USER)
+#PIZCOIND_PIDDIR="/var/run/pizcoind"
 
 # What filename to give the pidfile
-#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/bitcoind.pid"
+#PIZCOIND_PIDFILE="${PIZCOIND_PIDDIR}/pizcoind.pid"
 
-# Where to write bitcoind data (be mindful that the blockchain is large)
-#BITCOIND_DATADIR="/var/lib/bitcoind"
+# Where to write pizcoind data (be mindful that the blockchain is large)
+#PIZCOIND_DATADIR="/var/lib/pizcoind"
 
-# User and group to own bitcoind process
-#BITCOIND_USER="bitcoin"
-#BITCOIND_GROUP="bitcoin"
+# User and group to own pizcoind process
+#PIZCOIND_USER="pizcoin"
+#PIZCOIND_GROUP="pizcoin"
 
-# Path to bitcoind executable
-#BITCOIND_BIN="/usr/bin/bitcoind"
+# Path to pizcoind executable
+#PIZCOIND_BIN="/usr/bin/pizcoind"
 
-# Nice value to run bitcoind under
-#BITCOIND_NICE=0
+# Nice value to run pizcoind under
+#PIZCOIND_NICE=0
 
 # Additional options (avoid -conf and -datadir, use flags above)
-#BITCOIND_OPTS=""
+#PIZCOIND_OPTS=""
 
-# The timeout in seconds OpenRC will wait for bitcoind to terminate
+# The timeout in seconds OpenRC will wait for pizcoind to terminate
 # after a SIGTERM has been raised.
 # Note that this will be mapped as argument to start-stop-daemon's
 # '--retry' option, which means you can specify a retry schedule
 # here. For more information see man 8 start-stop-daemon.
-BITCOIND_SIGTERM_TIMEOUT=60
+PIZCOIND_SIGTERM_TIMEOUT=60

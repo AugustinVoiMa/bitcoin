@@ -1,9 +1,9 @@
-// Copyright (c) 2016-2017 The Bitcoin Core developers
+// Copyright (c) 2016-2017 The Pizcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_BLOCKENCODINGS_H
-#define BITCOIN_BLOCKENCODINGS_H
+#ifndef PIZCOIN_BLOCKENCODINGS_H
+#define PIZCOIN_BLOCKENCODINGS_H
 
 #include <primitives/block.h>
 
@@ -206,4 +206,4 @@ public:
     ReadStatus FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing);
 };
 
-#endif // BITCOIN_BLOCKENCODINGS_H
+#endif // PIZCOIN_BLOCKENCODINGS_H

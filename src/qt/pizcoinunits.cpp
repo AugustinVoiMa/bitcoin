@@ -1,36 +1,36 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2017 The Pizcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/bitcoinunits.h>
+#include <qt/pizcoinunits.h>
 
 #include <primitives/transaction.h>
 
 #include <QStringList>
 
-BitcoinUnits::BitcoinUnits(QObject *parent):
+PizcoinUnits::PizcoinUnits(QObject *parent):
         QAbstractListModel(parent),
         unitlist(availableUnits())
 {
 }
 
-QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
+QList<PizcoinUnits::Unit> PizcoinUnits::availableUnits()
 {
-    QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(BTC);
-    unitlist.append(mBTC);
-    unitlist.append(uBTC);
+    QList<PizcoinUnits::Unit> unitlist;
+    unitlist.append(PIZ);
+    unitlist.append(mPIZ);
+    unitlist.append(uPIZ);
     unitlist.append(SAT);
     return unitlist;
 }
 
-bool BitcoinUnits::valid(int unit)
+bool PizcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTC:
-    case mBTC:
-    case uBTC:
+    case PIZ:
+    case mPIZ:
+    case uPIZ:
     case SAT:
         return true;
     default:
@@ -38,65 +38,65 @@ bool BitcoinUnits::valid(int unit)
     }
 }
 
-QString BitcoinUnits::longName(int unit)
+QString PizcoinUnits::longName(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("BTC");
-    case mBTC: return QString("mBTC");
-    case uBTC: return QString::fromUtf8("µBTC (bits)");
+    case PIZ: return QString("PIZ");
+    case mPIZ: return QString("mPIZ");
+    case uPIZ: return QString::fromUtf8("µPIZ (bits)");
     case SAT: return QString("Satoshi (sat)");
     default: return QString("???");
     }
 }
 
-QString BitcoinUnits::shortName(int unit)
+QString PizcoinUnits::shortName(int unit)
 {
     switch(unit)
     {
-    case uBTC: return QString::fromUtf8("bits");
+    case uPIZ: return QString::fromUtf8("bits");
     case SAT: return QString("sat");
     default: return longName(unit);
     }
 }
 
-QString BitcoinUnits::description(int unit)
+QString PizcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Bitcoins");
-    case mBTC: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Micro-Bitcoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case PIZ: return QString("Pizcoins");
+    case mPIZ: return QString("Milli-Pizcoins (1 / 1" THIN_SP_UTF8 "000)");
+    case uPIZ: return QString("Micro-Pizcoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
 
-qint64 BitcoinUnits::factor(int unit)
+qint64 PizcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTC: return 100000000;
-    case mBTC: return 100000;
-    case uBTC: return 100;
+    case PIZ: return 100000000;
+    case mPIZ: return 100000;
+    case uPIZ: return 100;
     case SAT: return 1;
     default: return 100000000;
     }
 }
 
-int BitcoinUnits::decimals(int unit)
+int PizcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8;
-    case mBTC: return 5;
-    case uBTC: return 2;
+    case PIZ: return 8;
+    case mPIZ: return 5;
+    case uPIZ: return 2;
     case SAT: return 0;
     default: return 0;
     }
 }
 
-QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators)
+QString PizcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
@@ -140,12 +140,12 @@ QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separator
 // Please take care to use formatHtmlWithUnit instead, when
 // appropriate.
 
-QString BitcoinUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString PizcoinUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     return format(unit, amount, plussign, separators) + QString(" ") + shortName(unit);
 }
 
-QString BitcoinUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString PizcoinUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(formatWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
@@ -153,7 +153,7 @@ QString BitcoinUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool p
 }
 
 
-bool BitcoinUnits::parse(int unit, const QString &value, CAmount *val_out)
+bool PizcoinUnits::parse(int unit, const QString &value, CAmount *val_out)
 {
     if(!valid(unit) || value.isEmpty())
         return false; // Refuse to parse invalid unit or empty string
@@ -192,23 +192,23 @@ bool BitcoinUnits::parse(int unit, const QString &value, CAmount *val_out)
     return ok;
 }
 
-QString BitcoinUnits::getAmountColumnTitle(int unit)
+QString PizcoinUnits::getAmountColumnTitle(int unit)
 {
     QString amountTitle = QObject::tr("Amount");
-    if (BitcoinUnits::valid(unit))
+    if (PizcoinUnits::valid(unit))
     {
-        amountTitle += " ("+BitcoinUnits::shortName(unit) + ")";
+        amountTitle += " ("+PizcoinUnits::shortName(unit) + ")";
     }
     return amountTitle;
 }
 
-int BitcoinUnits::rowCount(const QModelIndex &parent) const
+int PizcoinUnits::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return unitlist.size();
 }
 
-QVariant BitcoinUnits::data(const QModelIndex &index, int role) const
+QVariant PizcoinUnits::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
     if(row >= 0 && row < unitlist.size())
@@ -228,7 +228,7 @@ QVariant BitcoinUnits::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-CAmount BitcoinUnits::maxMoney()
+CAmount PizcoinUnits::maxMoney()
 {
     return MAX_MONEY;
 }

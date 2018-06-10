@@ -1,28 +1,28 @@
 (note: this is a temporary file, to be added-to by anybody, and moved to
 release-notes at release time)
 
-Bitcoin Core version *version* is now available from:
+Pizcoin Core version *version* is now available from:
 
-  <https://bitcoincore.org/bin/bitcoin-core-*version*/>
+  <https://pizcoincore.org/bin/pizcoin-core-*version*/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/bitcoin/bitcoin/issues>
+  <https://github.com/pizcoin/pizcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://bitcoincore.org/en/list/announcements/join/>
+  <https://pizcoincore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Bitcoin-Qt` (on Mac)
-or `bitcoind`/`bitcoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/Pizcoin-Qt` (on Mac)
+or `pizcoind`/`pizcoin-qt` (on Linux).
 
 The first time you run version 0.15.0, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
@@ -47,10 +47,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Bitcoin Core is extensively tested on multiple operating systems using
+Pizcoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows 7 and newer (Windows XP is not supported).
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+Pizcoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 Notable changes
@@ -72,7 +72,7 @@ RPC changes
   `getrawtransaction` RPC commands.
 - New `fees` field introduced in `getrawmempool`, `getmempoolancestors`, `getmempooldescendants` and
    `getmempoolentry` when verbosity is set to `true` with sub-fields `ancestor`, `base`, `modified`
-   and `descendant` denominated in BTC. This new field deprecates previous fee fields, such as
+   and `descendant` denominated in PIZ. This new field deprecates previous fee fields, such as
    `fee`, `modifiedfee`, `ancestorfee` and `descendantfee`.
 
 External wallet files
@@ -99,9 +99,9 @@ same as before.
 Low-level RPC changes
 ---------------------
 
-- When bitcoin is not started with any `-wallet=<path>` options, the name of
+- When pizcoin is not started with any `-wallet=<path>` options, the name of
   the default wallet returned by `getwalletinfo` and `listwallets` RPCs is
-  now the empty string `""` instead of `"wallet.dat"`. If bitcoin is started
+  now the empty string `""` instead of `"wallet.dat"`. If pizcoin is started
   with any `-wallet=<path>` options, there is no change in behavior, and the
   name of any wallet is just its `<path>` string.
 - Passing an empty string (`""`) as the `address_type` parameter to
@@ -143,4 +143,4 @@ Credits
 Thanks to everyone who directly contributed to this release:
 
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/pizcoin/).

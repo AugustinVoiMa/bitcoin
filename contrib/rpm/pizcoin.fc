@@ -1,8 +1,8 @@
-/usr/bin/bitcoin-cli		--	gen_context(system_u:object_r:bitcoin_exec_t,s0)
-/usr/sbin/bitcoind		--	gen_context(system_u:object_r:bitcoin_exec_t,s0)
-/usr/lib(64)?/bitcoin/bitcoind		--	gen_context(system_u:object_r:bitcoin_exec_t,s0)
+/usr/bin/pizcoin-cli		--	gen_context(system_u:object_r:pizcoin_exec_t,s0)
+/usr/sbin/pizcoind		--	gen_context(system_u:object_r:pizcoin_exec_t,s0)
+/usr/lib(64)?/pizcoin/pizcoind		--	gen_context(system_u:object_r:pizcoin_exec_t,s0)
 
-/etc/bitcoin(/.*)?		gen_context(system_u:object_r:bitcoin_conf_t,s0)
-/var/lib/bitcoin(/.*)?		gen_context(system_u:object_r:bitcoin_var_lib_t,s0)
+/etc/pizcoin(/.*)?		gen_context(system_u:object_r:pizcoin_conf_t,s0)
+/var/lib/pizcoin(/.*)?		gen_context(system_u:object_r:pizcoin_var_lib_t,s0)
 
-(/var)?/run/bitcoind(/.*)?   gen_context(system_u:object_r:bitcoin_var_run_t,s0)
+(/var)?/run/pizcoind(/.*)?   gen_context(system_u:object_r:pizcoin_var_run_t,s0)
