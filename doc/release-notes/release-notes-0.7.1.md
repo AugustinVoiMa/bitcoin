@@ -77,7 +77,7 @@ Bug fixes
 
 * Clicking on a pizcoin: URI on Windows should now launch Pizcoin-Qt properly.
 
-* When running -testnet, use RPC port 18332 by default.
+* When running -testnet, use RPC port 13141 by default.
 
 * Better detection and handling of corrupt wallet.dat and blkindex.dat files.
   Previous versions would crash with a DB_RUNRECOVERY exception, this
