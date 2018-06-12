@@ -144,9 +144,9 @@ public:
           std::cout<<"new mainnet genesis nonce: "<< genesis.nNonce<<std::endl;
           std::cout<<"new mainnet genesis hash: "<< genesis.GetHash().ToString()<<std::endl;
 
-          consensus.hashGenesisBlock = genesis.GetHash();
           std::cout<<"hashGenesisBlock = "<<consensus.hashGenesisBlock.ToString();
         }
+        consensus.hashGenesisBlock = genesis.GetHash();
 	      assert(consensus.hashGenesisBlock == uint256S("0x00000aeff233a82e062f05ac2d5344cb565d062f1484f713002a28593e71f1c5"));
         assert(genesis.hashMerkleRoot == uint256S("0x88feee80bedafb28868963a4670a7defd1cba0a7857212668422441d419f631f"));
 
