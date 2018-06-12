@@ -14,6 +14,8 @@
 
 #include <chainparamsseeds.h>
 
+#include <arith_uint256.h>
+
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     CMutableTransaction txNew;
@@ -80,8 +82,8 @@ public:
         consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
         consensus.BIP65Height = 388381; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.BIP66Height = 363725; // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
-        consensus.powLimit = uint256S("000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = (3 * 24 + 14) * 60 * 60; // two weeks
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.nPowTargetTimespan = ((3 * 24 + 14) * 60 + 15) * 60; // 3 days, 14 hours, 15 min
         consensus.nPowTargetSpacing = 3.1415 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -102,10 +104,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1510704000; // November 15th, 2017.
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000f91c579d57cad4bc5278cc");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x0000000000000000005214481d2d96f898e3d5416e43359c145944a909d242e0"); //506067
+        consensus.defaultAssumeValid = uint256S("0x00000aeff233a82e062f05ac2d5344cb565d062f1484f713002a28593e71f1c5"); //0
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -119,26 +121,32 @@ public:
         nDefaultPort = 3142;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1528644334, 0, 0x1d00ffff, 1, 31.4 * COIN);
+        // unsigned int nBits = UintToArith256(consensus.powLimit).GetCompact();
+        unsigned int nBits = 504365055;
+        genesis = CreateGenesisBlock(1528644334, 3892864, nBits, 1, 31.4 * COIN);
+        if(true){
+          std::cout<<"nBits: "<<nBits<<std::endl;
+          std::cout<<"recalculating params for mainnet."<< std::endl;
+          std::cout<<"old mainnet genesis nonce: "<<genesis.nNonce<<std::endl;
+          std::cout<<"old mainnet genesis hash:  "<< consensus.hashGenesisBlock.ToString()<<std::endl;
+          // deliberately empty for loop finds nonce value.
+          genesis.nNonce--;
+          do{
+            std::cout<<genesis.nNonce<<" : "<<genesis.GetHash().ToString()<<">"<<consensus.powLimit.ToString()<<"\r";
+            genesis.nNonce++;
+          }while(consensus.powLimit.ToString() < genesis.GetHash().ToString());
 
-        std::cout<<"recalculating params for mainnet."<< std::endl;
-        std::cout<<"old mainnet genesis nonce: "<<genesis.nNonce<<std::endl;
-        std::cout<<"old mainnet genesis hash:  "<< consensus.hashGenesisBlock.ToString()<<std::endl;
-        // deliberately empty for loop finds nonce value.
-        do{
-          std::cout<<genesis.nNonce<<" : "<<genesis.GetHash().ToString()<<">"<<consensus.powLimit.ToString()<<"\r";
-          genesis.nNonce++;
-        }while(consensus.powLimit.ToString() < genesis.GetHash().ToString());
+          std::cout<<std::endl<<"end"<<std::endl<<genesis.nNonce<<" : "<<genesis.GetHash().ToString()<<"<"<<consensus.powLimit.ToString()<<std::endl;
 
-        std::cout<<std::endl<<"end"<<std::endl<<genesis.nNonce<<" : "<<genesis.GetHash().ToString()<<"<"<<consensus.powLimit.ToString()<<std::endl;
+          std::cout<<"new mainnet genesis merkle root: "<< genesis.hashMerkleRoot.ToString()<<std::endl;
+          std::cout<<"new mainnet genesis nonce: "<< genesis.nNonce<<std::endl;
+          std::cout<<"new mainnet genesis hash: "<< genesis.GetHash().ToString()<<std::endl;
 
-        std::cout<<"new mainnet genesis merkle root: "<< genesis.hashMerkleRoot.ToString()<<std::endl;
-        std::cout<<"new mainnet genesis nonce: "<< genesis.nNonce<<std::endl;
-        std::cout<<"new mainnet genesis hash: "<< genesis.GetHash().ToString()<<std::endl;
-
-        consensus.hashGenesisBlock = genesis.GetHash();
-	      assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+          consensus.hashGenesisBlock = genesis.GetHash();
+          std::cout<<"hashGenesisBlock = "<<consensus.hashGenesisBlock.ToString();
+        }
+	      assert(consensus.hashGenesisBlock == uint256S("0x00000aeff233a82e062f05ac2d5344cb565d062f1484f713002a28593e71f1c5"));
+        assert(genesis.hashMerkleRoot == uint256S("0x88feee80bedafb28868963a4670a7defd1cba0a7857212668422441d419f631f"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
@@ -167,7 +175,7 @@ public:
 
         checkpointData = {
             {
-                {0, uint256S("0x001")},
+                {0, uint256S("0x0000002320fecfeadea897ca583b6c6a4b39dd09454c6d2e1796144a28fda940")},
             }
         };
 
@@ -231,22 +239,22 @@ public:
         nDefaultPort = 13142;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1528644334, 414098458, 0x1d00ffff, 1, 50 * COIN);
-        consensus.hashGenesisBlock = uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943");
-        if (true && genesis.GetHash() != consensus.hashGenesisBlock)
-        {
-            strprintf("recalculating params for testnet.\n");
-            strprintf("old testnet genesis nonce: %d\n", genesis.nNonce);
-            strprintf("old testnet genesis hash:  %s\n", consensus.hashGenesisBlock.ToString());
-            // deliberately empty for loop finds nonce value.
-            for(genesis.nNonce = 0; consensus.powLimit < genesis.GetHash(); genesis.nNonce++){ }
-            strprintf("new testnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString());
-            strprintf("new testnet genesis nonce: %d\n", genesis.nNonce);
-            strprintf("new testnet genesis hash: %s\n", genesis.GetHash().ToString());
-        }
+        genesis = CreateGenesisBlock(1528644334, 1847266, 0x1d00ffff, 1, 31.4 * COIN);
+        // consensus.hashGenesisBlock = uint256S("0x01");
+        // if (true && genesis.GetHash() != consensus.hashGenesisBlock)
+        // {
+        //     strprintf("recalculating params for testnet.\n");
+        //     strprintf("old testnet genesis nonce: %d\n", genesis.nNonce);
+        //     strprintf("old testnet genesis hash:  %s\n", consensus.hashGenesisBlock.ToString());
+        //     // deliberately empty for loop finds nonce value.
+        //     for(genesis.nNonce = 0; consensus.powLimit < genesis.GetHash(); genesis.nNonce++){ }
+        //     strprintf("new testnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString());
+        //     strprintf("new testnet genesis nonce: %d\n", genesis.nNonce);
+        //     strprintf("new testnet genesis hash: %s\n", genesis.GetHash().ToString());
+        // }
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000002320fecfeadea897ca583b6c6a4b39dd09454c6d2e1796144a28fda940"));
+        assert(genesis.hashMerkleRoot == uint256S("0x88feee80bedafb28868963a4670a7defd1cba0a7857212668422441d419f631f"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
