@@ -16,6 +16,8 @@
 
 #include <arith_uint256.h>
 
+#define GENESIS_MINING false
+
 static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     CMutableTransaction txNew;
@@ -124,7 +126,7 @@ public:
         // unsigned int nBits = UintToArith256(consensus.powLimit).GetCompact();
         unsigned int nBits = 504365055;
         genesis = CreateGenesisBlock(1528644334, 3892864, nBits, 1, 31.4 * COIN);
-        if(true){
+        if(GENESIS_MINING){
           std::cout<<"nBits: "<<nBits<<std::endl;
           std::cout<<"recalculating params for mainnet."<< std::endl;
           std::cout<<"old mainnet genesis nonce: "<<genesis.nNonce<<std::endl;
