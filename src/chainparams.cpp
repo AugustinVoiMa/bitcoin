@@ -84,7 +84,7 @@ public:
         consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
         consensus.BIP65Height = 388381; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.BIP66Height = 363725; // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
-        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        consensus.powLimit = uint256S("000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = ((3 * 24 + 14) * 60 + 15) * 60; // 3 days, 14 hours, 15 min
         consensus.nPowTargetSpacing = 3.1415 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -124,8 +124,8 @@ public:
         nPruneAfterHeight = 100000;
 
         // unsigned int nBits = UintToArith256(consensus.powLimit).GetCompact();
-        unsigned int nBits = 504365055;
-        genesis = CreateGenesisBlock(1528644334, 3892864, nBits, 1, 31.4 * COIN);
+        unsigned int nBits = 503382015;
+        // genesis = CreateGenesisBlock(1528872115, 5113166, nBits, 1, 3.1415 * COIN);
         if(GENESIS_MINING){
           std::cout<<"nBits: "<<nBits<<std::endl;
           std::cout<<"recalculating params for mainnet."<< std::endl;
@@ -147,8 +147,8 @@ public:
           std::cout<<"hashGenesisBlock = "<<consensus.hashGenesisBlock.ToString();
         }
         consensus.hashGenesisBlock = genesis.GetHash();
-	      assert(consensus.hashGenesisBlock == uint256S("0x00000aeff233a82e062f05ac2d5344cb565d062f1484f713002a28593e71f1c5"));
-        assert(genesis.hashMerkleRoot == uint256S("0x88feee80bedafb28868963a4670a7defd1cba0a7857212668422441d419f631f"));
+	      assert(consensus.hashGenesisBlock == uint256S("0x000000fa9b3119d8bd04f8f9bb0d644d0f1a771c22e432143c2cc11ae8bb50d0"));
+        assert(genesis.hashMerkleRoot == uint256S("0x138bf88df25dcec8cc295664e990d41e966b831f4c96207bfafea99cc82780c5"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
@@ -183,7 +183,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data as of block 0000000000000000002d6cca6761c99b3c2e936f9a0e304b7c7651a993f461de (height 506081).
-            1528644334, // * UNIX timestamp of last known number of transactions
+            1528872115, // * UNIX timestamp of last known number of transactions
             0,          // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the ChainStateFlushed debug.log lines)
             500         // * estimated number of transactions per second after that timestamp
@@ -241,7 +241,7 @@ public:
         nDefaultPort = 13142;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1528644334, 1847266, 0x1d00ffff, 1, 31.4 * COIN);
+        genesis = CreateGenesisBlock(1528872115, 1847266, 0x1d00ffff, 1, 31.4 * COIN);
         // consensus.hashGenesisBlock = uint256S("0x01");
         // if (true && genesis.GetHash() != consensus.hashGenesisBlock)
         // {
@@ -286,7 +286,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data as of block 000000000000033cfa3c975eb83ecf2bb4aaedf68e6d279f6ed2b427c64caff9 (height 1260526)
-            1528644334,
+            1528872115,
             0,
             250
         };
@@ -339,7 +339,7 @@ public:
         nDefaultPort = 18444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1528644334, 2, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1528872115, 2, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = uint256S("0x0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206");
         if (true && genesis.GetHash() != consensus.hashGenesisBlock)
         {
@@ -370,7 +370,7 @@ public:
         };
 
         chainTxData = ChainTxData{
-            1528644334,
+            1528872115,
             0,
             0
         };

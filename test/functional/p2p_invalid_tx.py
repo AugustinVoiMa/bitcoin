@@ -70,7 +70,7 @@ class InvalidTxRequestTest(PizcoinTestFramework):
         # Transaction will be rejected with code 16 (REJECT_INVALID)
         # and we get disconnected immediately
         self.log.info('Test a transaction that is rejected')
-        tx1 = create_transaction(block1.vtx[0], 0, b'\x64' * 35, 50 * COIN - 12000)
+        tx1 = create_transaction(block1.vtx[0], 0, b'\x64' * 35, 3.1415 * COIN - 12000)
         node.p2p.send_txs_and_test([tx1], node, success=False, expect_disconnect=True)
 
         # Make two p2p connections to provide the node with orphans
@@ -84,7 +84,7 @@ class InvalidTxRequestTest(PizcoinTestFramework):
         SCRIPT_PUB_KEY_OP_TRUE = b'\x51\x75' * 15 + b'\x51'
         tx_withhold = CTransaction()
         tx_withhold.vin.append(CTxIn(outpoint=COutPoint(block1.vtx[0].sha256, 0)))
-        tx_withhold.vout.append(CTxOut(nValue=50 * COIN - 12000, scriptPubKey=SCRIPT_PUB_KEY_OP_TRUE))
+        tx_withhold.vout.append(CTxOut(nValue=3.1415 * COIN - 12000, scriptPubKey=SCRIPT_PUB_KEY_OP_TRUE))
         tx_withhold.calc_sha256()
 
         # Our first orphan tx with some outputs to create further orphan txs
